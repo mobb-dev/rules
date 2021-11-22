@@ -1,14 +1,12 @@
 # How to contribute
 
-Before you contribute start with a bit of research. Check if ther are any rules for what you're about to add. If there's no rule, let's get started. 
-You can see the entire rules set under `/rules/<engine>/<language>/`, if there's no rule in there, get started.
+Before you contribute start with a bit of research. Check if there are any rules for what you're about to add. 
+You can see the entire rules set under `/rules/<engine>/<language>/`, If no rule is found, let's get started. 
 
 ### 1. Select a rule name and create your contribution folder
 In the "rules" folder, under the engine & langauge you want to write the rules for, create a folder with the name of your new rule.
 
-If you want to create a rule for `SQL Injection` for `NodeJS` under the `semgrep` engine, use something like this: 
-Once you picked a name create a folder called same thing as your rule name under. I'm going to create my rule: `NodeJS_SQL_Injection`
-`/rules/semgrep/JavaScript/NodeJS_SQL_Injection`
+e.g. if you want to create a rule to detect `SQL Injection` in the `NodeJS` framework using the `semgrep` engine, your rule name may be called: `NodeJS_SQL_Injection` and the created folder will be `/rules/semgrep/JavaScript/NodeJS_SQL_Injection`
 
 Then create a .yaml file with your semgrep rule and an Article.MD file that will be the article explaining your rule. 
 
