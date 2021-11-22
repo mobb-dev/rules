@@ -29,5 +29,5 @@ Your final folder structure should look something like this:
 
 ### 4. Write the article 
 
-Check out the [Article.MD](https://github.com/Mobb-dev/Portal/blob/main/Article.MD) for a sample.
+Check out the [Article.MD](/Article.MD) for a sample.
 
