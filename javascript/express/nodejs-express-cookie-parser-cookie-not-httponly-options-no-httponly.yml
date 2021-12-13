@@ -1,0 +1,40 @@
+rules:
+  - id: nodejs-express-cookie-parser-cookie-not-httponly-options-no-httponly
+    patterns:
+      - pattern-inside: |
+          $MODULE = require('cookie-parser');
+          ...
+      - pattern-inside: |
+          $APP = express();
+          ...
+      - pattern-inside: |
+          $APP.use($MODULE);
+          ...
+      - pattern-inside: |
+          $APP.$METHOD(..., function $FUNC($REQ, $RES, ...) {...})
+      - pattern: |
+          $RES.cookie('$TOKEN', '$VALUE', {...});
+      - pattern-not: |
+          $RES.cookie('$TOKEN', '$VALUE', {..., httpOnly: $HTTPONLYVAL, ...});
+      - metavariable-pattern:
+          metavariable: $METHOD
+          pattern-regex: (get|post|put|head|delete|options)
+    fix-regex:
+      regex: |-
+        (.*)\}
+      replacement: |-
+        \1, httpOnly: true}
+    message: >-
+      When setting cookies in the response for the user, you should add the 'httpOnly' attribute in the options in order for the cookie to be secure.
+      'httpOnly' cookies are not accessible from the Javascript code that runs in the browser, whereas regular non 'httpOnly' cookies are.
+      Normally, a user would want their cookies inaccessible from the code in the browser as this makes XSS vulnerabilities harder to exploit by attackers.
+    metadata:
+      owasp: 'A05:2021 - Security Misconfiguration'
+      cwe: "CWE-1004: Sensitive Cookie Without 'HttpOnly' Flag"
+      category: security
+      technology:
+        - express
+    severity: WARNING
+    languages:
+      - javascript
+      - typescript
