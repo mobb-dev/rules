@@ -17,7 +17,7 @@ e.g. for a detailed rule name, if you want to create rules for insecure issues r
 |          -- express                       <-- The framework you're writting the rule for
 ```
 
-as we encourage contributors to write rules that not only detect issues but can also fix them, you may have multiple rules for similar vulnerabilities to address the different formatting. In those cases, you should re-use the message and metadata include in the different rules. 
+as we encourage contributors to write rules that not only detect issues but can also fix them, you may have multiple rules for similar vulnerabilities to address different contexts and formatting styles. In these cases, you should re-use the message and metadata in the different rules. 
 
 ### 2. Create your rule 
 When creating the rule, follow the guidelines provided for the open-source engine you want to use. It is very important to include a description of the problem and how to fix it with references to external resources such as a [`CWE`](https://cwe.mitre.org/) and [`OWASP`](https://owasp.org/Top10/) categorization 
