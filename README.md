@@ -22,4 +22,4 @@ as we encourage contributors to write rules that not only detect issues but can 
 ### 2. Create your rule 
 When creating the rule, follow the guidelines provided for the open-source engine you want to use. It is very important to include a description of the problem and how to fix it with references to external resources such as a [`CWE`](https://cwe.mitre.org/) and [`OWASP`](https://owasp.org/Top10/) categorization.
 
-Each rule should also incldue at least one good and bad samples codes for testing. You can take a look at this [rule](./semgrep/javascript/express/nodejs-express-cookie-parser-cookie-not-httponly-no-options.yml) and [code](./semgrep/javascript/express/nodejs-express-cookie-parser-cookie-not-httponly-options-no-httponly.js) for example 
+Each rule should also incldue at least one good and bad code samples for testing. You can take a look at this [rule](./semgrep/javascript/express/nodejs-express-cookie-parser-cookie-not-httponly-no-options.yml) and [code](./semgrep/javascript/express/nodejs-express-cookie-parser-cookie-not-httponly-options-no-httponly.js) for example.
