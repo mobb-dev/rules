@@ -12,9 +12,10 @@ Make sure the name you pick for the rule is as descriptive as possible, this wil
 e.g. for a detailed rule name, if you want to create rules for insecure issues related to the `httponly` attribute from a cookie when using `cookie-parser` in the `express` `javascript` framework using the `semgrep` engine one of your rule names can be `nodejs-express-cookie-parser-cookie-no-httponly` and it should be located under  
 ```
 |-- rules
-|   -- semgrep                              <-- Same as the engine you chose
-|       -- javascript                       <-- The language you're writting the rule for
-|          -- express                       <-- The framework you're writting the rule for
+|   -- semgrep                             <-- Same as the engine you chose
+|       -- javascript                      <-- The language you're writting the rule for
+|          -- nodejs                       <-- The framework you're writting the rule for
+|             -- express                   <-- In this case, the rule is for a framework of a framework so adding another layer
 ```
 
 as we encourage contributors to write rules that not only detect issues but can also fix them, you may have multiple rules for similar vulnerabilities to address different contexts and formatting styles. In these cases, you should re-use the message and metadata in the different rules. 
