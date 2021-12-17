@@ -9,7 +9,7 @@ You can see the entire rules set under `/rules/<engine>/<language>/<framework>/`
 Our rules repo is set to hold rules to multiple different open-source engines. As such, the hierarchy we use to store the rules starts on the engine, followed by langauge, and framework (when applicable) each rule should be located in the folder of the framework it is written for. 
 Make sure the name you pick for the rule is as descriptive as possible, this will make it easier for others to find that such a rule already exists.
 
-e.g. for a detailed rule name, if you want to create rules for insecure issues related to the `httponly` attribute from a cookie when using `cookie-parser` in the `express` `javascript` framework using the `semgrep` engine one of your rule names can be `cookie-parser-cookie-not-httponly-options-no-httponly` and it should be located under  
+e.g. for a detailed rule name, if you want to create rules for insecure issues related to the `httponly` attribute from a cookie when using `cookie-parser` in the `express` `javascript` framework using the `semgrep` engine one of your rule names can be `nodejs-express-cookie-parser-cookie-no-httponly` and it should be located under  
 ```
 |-- rules
 |   -- semgrep                              <-- Same as the engine you chose
