@@ -1,11 +1,28 @@
 rules:
   - id: nodejs-express-cookie-parser-cookie-not-httponly-options-no-httponly
     patterns:
+      - pattern-either:
+          - pattern-inside: |
+              $MODULE = require('cookie-parser');
+              ...
+          - pattern-inside: |
+              import $MODULE from 'cookie-parser';
+              ...
+          - pattern-inside: |
+              import * as $MODULE from 'cookie-parser';
+              ...
+      - pattern-either:
+          - pattern-inside: |
+              $EXP = require('express');
+              ...
+          - pattern-inside: |
+              import $EXP from 'express';
+              ...
+          - pattern-inside: |
+              import * as $EXP from 'express';
+              ...
       - pattern-inside: |
-          $MODULE = require('cookie-parser');
-          ...
-      - pattern-inside: |
-          $APP = express();
+          $APP = $EXP();
           ...
       - pattern-inside: |
           $APP.use($MODULE);
