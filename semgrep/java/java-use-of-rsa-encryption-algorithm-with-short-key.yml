@@ -1,0 +1,22 @@
+- id: java-use-of-rsa-encryption-algorithm-with-short-key
+  message: |
+    It is not secure to use the RSA algorithm with a 1024-bit key. The minimal acceptable key length is 2048 bits.
+  languages: [ java ]
+  severity: ERROR
+  metadata:
+    vulnerability_category: weak_cryptography
+    violation_id: weak_encryption_algorithm
+    standards: [ Microsoft SDL ]
+    references:
+      - https://docs.microsoft.com/en-us/security/sdl/cryptographic-recommendations
+  patterns:
+    - pattern: |
+        $K = $C.getInstance("$RE");
+        ...
+        $K.initialize($BITS);
+    - metavariable-regex:
+        metavariable: $RE
+        regex: "(?i)^rsa$"
+    - metavariable-comparison:
+        comparison: $BITS < 2048
+        metavariable: $BITS
