@@ -1,0 +1,19 @@
+rules:
+  - id: token_audience_validation_check_enabled
+    languages:
+      - csharp
+    message: |
+      The tokens allowed do not meet the minimum security recommendations! 
+    patterns:
+      - pattern-inside:
+          using Microsoft.IdentityModel.Tokens;
+          ...
+      - pattern-inside:
+          TokenValidationParameters $PARAMETERS = new TokenValidationParameters();
+          ... 
+      - pattern:
+          $PARAMETERS.ValidateAudience = false;
+    fix: $PARAMETERS.ValidateAudience = true;
+    severity: WARNING
+    metadata:
+      references: https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5404

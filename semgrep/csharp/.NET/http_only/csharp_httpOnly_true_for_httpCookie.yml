@@ -1,0 +1,19 @@
+rules:
+  - id: csharp_httpOnly_true_for_httpCookie
+    languages:
+      - csharp
+    message: |
+      Security threat detected when allowing untrusted tokens to make it through validation. 
+    patterns:
+      - pattern-inside: |
+          using System.Web;          
+          ...
+      - pattern-inside: |
+          HttpCookie $HTTPCOOKIE = new HttpCookie($X);
+          ...
+      - pattern: |
+          $HTTPCOOKIE.HttpOnly = false;
+    fix: $HTTPCOOKIE.HttpOnly = true;
+    severity: WARNING
+    metadata:
+      references: https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5404
