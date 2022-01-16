@@ -1,0 +1,25 @@
+- id: java-use-of-des-encryption-algorithm
+  message: |
+    DES is a weak algorithm that has known attacks and can be broken. Consider using a secure algorithm such as AES.
+  languages: [ java ]
+  severity: ERROR
+  metadata:
+    vulnerability_category: weak_cryptography
+    violation_id: weak_encryption_algorithm
+    standards: [ Microsoft SDL ]
+    references:
+      - https://docs.microsoft.com/en-us/security/sdl/cryptographic-recommendations
+  patterns:
+    - pattern-either:
+        - patterns:
+            - pattern: |
+                $MD.getInstance("$RE", ...);
+            - metavariable-regex:
+                metavariable: $RE
+                regex: "(?i)^DES/.*$"
+        - patterns:
+            - pattern: |
+                $MD.getInstance("$RE", ...);
+            - metavariable-regex:
+                metavariable: $RE
+                regex: "(?i)^des$"
