@@ -1,0 +1,32 @@
+rules:
+  - id: nodejs-mysql-body-inection 
+    languages:
+      - javascript
+    message: | 
+      Potential SQL Injection identified. Consider using the connection.escape method built in node-mysql
+    patterns:
+      - pattern-inside:  |
+          $MYSQL=require('mysql')
+          ...
+          $CONN = $MYSQL.createConnection(...)
+          ...
+      - pattern:  |
+          $CONN.query($SQL,...)
+      - pattern-either:
+        - pattern-inside: function ... ($REQ, $RES) {...}
+        - pattern-inside: function ... ($REQ, $RES, $NEXT) {...}
+        - pattern-inside: $APP.get(..., function $FUNC($REQ, $RES) {...})
+        - pattern-inside: $APP.post(..., function $FUNC($REQ, $RES) {...})
+        - pattern-inside: $APP.put(..., function $FUNC($REQ, $RES) {...})
+        - pattern-inside: $APP.head(..., function $FUNC($REQ, $RES) {...})
+        - pattern-inside: $APP.delete(..., function $FUNC($REQ, $RES) {...})
+        - pattern-inside: $APP.options(..., function $FUNC($REQ, $RES) {...})
+      - pattern-regex: \+.*?\+
+      - pattern-not-regex: \+.*?escape.*?\+
+      - pattern: $REQ.body.$DATA
+      - metavariable-pattern:
+          metavariable: $SQL
+          patterns:
+              - pattern-regex: .*\b(?i)(SELECT|CREATE|DROP|INSERT|DELETE|UPDATE|ALTER)\b.*
+    fix: $CONN.escape($REQ.body.$DATA)
+    severity: ERROR
