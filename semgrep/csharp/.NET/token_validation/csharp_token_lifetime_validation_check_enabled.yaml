@@ -1,0 +1,19 @@
+rules:
+  - id: token_lifetime_validation_check_enabled
+    languages:
+      - csharp
+    message: |
+      Insecure token validation. 
+    patterns:
+      - pattern-inside:
+          using Microsoft.IdentityModel.Tokens;
+          ...
+      - pattern-inside:
+          TokenValidationParameters $PARAMETERS = new TokenValidationParameters();
+          ... 
+      - pattern:
+          $PARAMETERS.ValidateLifetime = false;
+    fix: $PARAMETERS.ValidateLifetime = true;
+    severity: WARNING
+    metadata:
+      references: https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5404

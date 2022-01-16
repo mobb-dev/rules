@@ -1,0 +1,16 @@
+rules:
+  - id: token_issuer_validation_check_enabled
+    languages:
+      - csharp
+    message: |
+      Insecure token validation. 
+    patterns:
+      - pattern-inside:
+          using Microsoft.IdentityModel.Tokens;
+          ...
+      - pattern-inside:
+          TokenValidationParameters $PARAMETERS = new TokenValidationParameters();
+          ... 
+      - pattern:
+          $PARAMETERS.ValidateIssuer = false;
+    severity: WARNING
